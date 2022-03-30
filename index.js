@@ -30,6 +30,21 @@ app.post("/register", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  //요청된 이메일을 db에서 스캔.
+  User.findOne({ email: req.body.email }, (err, userInfo) => {
+    if (!userInfo) {
+      return res.json({
+        loginSuccess: false,
+        message: "해당하는 유저가 없습니다.",
+      });
+    }
+  });
+  //있다면 비밀번호가 같은지 확인.
+
+  //비밀번호 맞으면 유저를 위한 토큰 생성.
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
