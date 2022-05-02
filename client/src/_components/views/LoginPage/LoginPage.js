@@ -1,11 +1,13 @@
 import { Axios } from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { loginUser } from "../../../_actions/user_action";
 function LoginPage() {
   const disptach = useDispatch();
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
   };
@@ -14,15 +16,20 @@ function LoginPage() {
   };
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("Email", Email);
-    console.log("Password", Password);
 
     let body = {
       email: Email,
       password: Password,
     };
 
-    disptach(loginUser(body));
+    disptach(loginUser(body)).then((response) => {
+      if (response.payload.loginSuccess) {
+        // props.history.push("/");  : url은 변경되는데 페이지는 바뀌지 않는 현상 발생
+        window.location.replace("/");
+      } else {
+        alert("fail : sign in");
+      }
+    });
   };
   return (
     <div

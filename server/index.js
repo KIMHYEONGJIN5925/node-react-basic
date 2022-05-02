@@ -25,6 +25,12 @@ app.get("/", (req, res) => {
 //회원가입
 app.post("/api/users/register", (req, res) => {
   //회원가입할때 필요한 정보들 client에서 가져오면 그것들을 db에 넣어준다.
+  /* 
+  예외처리 넣을 수 있는것들
+  1. email 중복 확인
+  2. 비밀번호 규칙?
+  3. 
+  */
   const user = new User(req.body);
   user.save((err, userInfo) => {
     if (err) return res.json({ success: false, err });

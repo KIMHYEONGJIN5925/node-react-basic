@@ -6,6 +6,16 @@ function LandingPage() {
       console.log(response);
     });
   }, []);
+
+  const onClickHandler = () => {
+    axios.get("/api/users/logout").then((response) => {
+      if (response.data.success) {
+        window.location.replace("/login");
+      } else {
+        alert("fail : logout");
+      }
+    });
+  };
   return (
     <div
       style={{
@@ -17,6 +27,8 @@ function LandingPage() {
       }}
     >
       <h2>시작 페이지</h2>
+
+      <button onClick={onClickHandler}> 록아웃</button>
     </div>
   );
 }
