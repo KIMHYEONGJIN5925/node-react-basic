@@ -6,7 +6,31 @@ function LandingPage() {
       console.log(response);
     });
   }, []);
-  return <div>LandingPage 입니다zz.</div>;
+
+  const onClickHandler = () => {
+    axios.get("/api/users/logout").then((response) => {
+      if (response.data.success) {
+        window.location.replace("/login");
+      } else {
+        alert("fail : logout");
+      }
+    });
+  };
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <h2>시작 페이지</h2>
+
+      <button onClick={onClickHandler}> 록아웃</button>
+    </div>
+  );
 }
 
 export default LandingPage;
