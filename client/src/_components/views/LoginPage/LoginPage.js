@@ -2,7 +2,8 @@ import { Axios } from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
-function LoginPage() {
+// import { withRouter } from "react-router-dom";
+function LoginPage(props) {
   const disptach = useDispatch();
 
   const [Email, setEmail] = useState("");
@@ -24,7 +25,10 @@ function LoginPage() {
 
     disptach(loginUser(body)).then((response) => {
       if (response.payload.loginSuccess) {
-        // props.history.push("/");  : url은 변경되는데 페이지는 바뀌지 않는 현상 발생
+        // props.history.push("/");
+        // : url은 변경되는데 페이지는 바뀌지 않는 현상 발생
+        // withRouter 을 사용하지 않아서 그런건가? 확인해본다.
+        // 그 문제는 아니다.
         window.location.replace("/");
       } else {
         alert("fail : sign in");
