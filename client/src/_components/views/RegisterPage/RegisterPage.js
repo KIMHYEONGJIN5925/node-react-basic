@@ -37,7 +37,7 @@ function RegisterPage() {
     disptach(registerUser(body)).then((response) => {
       if (response.payload.success) {
         // props.history.push("/");  : url은 변경되는데 페이지는 바뀌지 않는 현상 발생
-        window.location.replace("/ogin");
+        window.location.replace("/login");
       } else {
         alert("fail : sign up");
       }
